@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج الشهادة الإعدادية</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .result-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .result-item {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mt-5">نتائج الشهادة الإعدادية - محافظة أسيوط</h2>
+        <div class="text-center">
+            <input type="text" id="seatNumber" class="form-control w-50 mx-auto" placeholder="أدخل رقم الجلوس">
+            <button onclick="showResult()" class="btn btn-primary my-2">عرض النتيجة</button>
+        </div>
+        <div id="result" class="result-container">
+            <!-- سيتم عرض النتائج هنا -->
+        </div>
+    </div>
+
+    <script>
+        // بيانات الطلاب
+        const students = [
+            {seatNumber: "13118", name: "محمد حفظي محمد", total: "262", school: "مدرسة عراميه الديوان"},
+            {seatNumber: "13122", name: "محمود احمد ابو الوفا", total: "470", school: "مدرسة عراميه الديوان"},
+            {seatNumber: "13119", name: "محمد صلاح علي", total: "430", school: "مدرسة عراميه الديوان"},
+            {seatNumber: "44556", name: " منة يوسف فهد", total: "390", school: "مدرسة عراميه الديوان"},
+            {seatNumber: "77889", name: "علي إبراهيم محمد", total: "410", school: "مدرسة عراميه الديوان"}
+        ];
+
+        // عرض النتيجة
+        function showResult() {
+            const seatNumber = document.getElementById('seatNumber').value;
+            const resultContainer = document.getElementById('result');
+            const student = students.find(s => s.seatNumber === seatNumber);
+
+            resultContainer.innerHTML = "";
+
+            if (student) {
+                resultContainer.innerHTML = `
+                    <div class="result-item">
+                        <p>اسم الطالب: ${student.name}</p>
+                        <p>مجموع الدرجات: ${student.total}</p>
+                        <p>رقم الجلوس: ${student.seatNumber}</p>
+                        <p>اسم المدرسة: ${student.school}</p>
+                    </div>
+                `;
+            } else {
+                resultContainer.innerHTML = "<p>لم يتم العثور على نتيجة لهذا الرقم</p>";
+            }
+        }
+    </script>
+</body>
+</html>
